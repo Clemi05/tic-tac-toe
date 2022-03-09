@@ -3,9 +3,11 @@
 }
 
 :root {
+  /* Sizes */
   --cell-size: 100px;
   --mark-size: calc(var(--cell-size) * .9);
 
+  /* Colors */
   --plump-purple: rgb(102, 78, 174);
   --russian-violet: rgb(26, 5, 84);
   --pale-purple: rgba(196, 168, 255, 0.9);
@@ -121,24 +123,35 @@ body {
 }
 
 .winner-message {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: var(--pale-purple);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: var(--russian-violet);
-  font-size: 32px;
+  font-size: 64px;
 }
 
 .winner-message button {
   font-size: 26px;
-  background-color: var(--plump-purple);
+  background-color: var(--russian-violet);
   color: white;
-  border: 1px solid var(--russian-violet);
+  border: 1px solid var(--rich-black);
   padding: .25em .5em;
   cursor: pointer;
+}
+
+.winner-message button:hover {
+  background-color: var(--pale-purple);
+  color: var(--russian-violet);
+  border: 1px solid white;
+}
+
+.winner-message.show {
+  display: flex;
 }
