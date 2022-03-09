@@ -21,8 +21,9 @@ body {
   background-color: var(--rich-black);
 }
 
+/* Board Style */
+
 .board {
-  /* width: 100vh; */
   height: 100vh;
   display: grid;
   justify-content: center;
@@ -31,6 +32,8 @@ body {
   align-items: center;
   grid-template-columns: repeat(3, auto);
 }
+
+/* Cell Style */
 
 .cell {
   width: var(--cell-size);
@@ -64,7 +67,7 @@ body {
 }
 
 
-/*  Cross and Circle Marks */
+/*  Cross and Circle Styles */
 
 .cell.cross, .cell.circle {
   cursor: not-allowed;
@@ -123,6 +126,8 @@ body {
   height: calc(var(--mark-size) * .7);
   background-color: var(--rich-black);
 }
+
+/* Winner message Style */
 
 .winner-message {
   display: none;

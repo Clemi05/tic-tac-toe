@@ -20,6 +20,7 @@ let circleTurn;
 
 startGame();
 
+// Reset class and eventlistener before starting a new game
 restartButton.addEventListener('click', startGame);
 
 function startGame() {
@@ -38,7 +39,7 @@ function handleClick(event) {
   // place the cross Mark or circle Mark
   const cell = event.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : CROSS_CLASS;
-  placeMark(cell, currentClass)
+  placeMark(cell, currentClass);
   if (checkWin(currentClass)) {
     endGame(false);
   } else if (isDraw()) {
@@ -47,20 +48,19 @@ function handleClick(event) {
     swapTurns()
     setBoardHoverClass()
   }
-  // Check for Win
-  // Check for Draw
-  // Switch turns between cross and circle
 }
 
+// Display draw message or winner message if winner
 function endGame(draw) {
-  if (draw) {
+  if (draw) { // Show draw message
     winnerMessageTextElement.innerText = "It's a Draw!!"
-  } else {
+  } else { // Show winner message
     winnerMessageTextElement.innerText = `${circleTurn ? "O" : "X"} is the winner!!`;
   }
   winnerMessageElement.classList.add('show');
 }
 
+// Check if Draw
 function isDraw() {
   return [...cellElements].every(cell => {
     return cell.classList.contains(CROSS_CLASS) ||
@@ -72,10 +72,12 @@ function placeMark(cell, currentClass) {
   cell.classList.add(currentClass);
 }
 
+// Switch turns between cross and circle
 function swapTurns() {
   circleTurn = !circleTurn;
 }
 
+// Switch hover effects in function of the turns
 function setBoardHoverClass() {
   board.classList.remove(CROSS_CLASS);
   board.classList.remove(CIRCLE_CLASS);
@@ -87,7 +89,7 @@ function setBoardHoverClass() {
 }
 
 // Check for Win
-// If the currentClass is in all 3 of each combination then we have a winner
+// If the currentClass is in all 3 box of each combination in the array then we have a winner
 function checkWin(currentClass) {
   return WINNING_COMBINATIONS.some(combination => {
     return combination.every(index => {
