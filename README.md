@@ -17,7 +17,7 @@ This is a code to build a tic tac toe game with HTML, CSS and JavaScript
 
 ### Links
 
-- Live Site URL: [Click here to see live site](https://your-live-site-url.com)
+- Live Site URL: [Click here to see live site](https://clemi05.github.io/tic-tac-toe/)
 - Repository URL: [Click here to see repository](https://github.com/Clemi05/tic-tac-toe)
 
 ## My process
