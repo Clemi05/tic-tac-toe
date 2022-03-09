@@ -1,7 +1,6 @@
 /* Variables */
 const CROSS_CLASS = 'cross';
 const CIRCLE_CLASS = 'circle';
-
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
   [3, 4, 5],
@@ -12,19 +11,27 @@ const WINNING_COMBINATIONS = [
   [0, 4, 8],
   [2, 4, 6]
 ];
-
 const cellElements = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('board');
+const winnerMessageElement = document.getElementById('winnerMessage');
+const restartButton = document.getElementById('restartBtn')
+const winnerMessageTextElement = document.querySelector('[data-winner-message-text]');
 let circleTurn;
 
-startGame()
+startGame();
+
+restartButton.addEventListener('click', startGame);
 
 function startGame() {
   circleTurn = false;
   cellElements.forEach(cell => {
-    cell.addEventListener('click', handleClick, { once: true })
+    cell.classList.remove(CROSS_CLASS);
+    cell.classList.remove(CIRCLE_CLASS);
+    cell.removeEventListener('click', handleClick);
+    cell.addEventListener('click', handleClick, { once: true });
   })
-  setBoardHoverClass()
+  setBoardHoverClass();
+  winnerMessageElement.classList.remove('show');
 }
 
 function handleClick(event) {
@@ -32,11 +39,33 @@ function handleClick(event) {
   const cell = event.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : CROSS_CLASS;
   placeMark(cell, currentClass)
+  if (checkWin(currentClass)) {
+    endGame(false);
+  } else if (isDraw()) {
+    endGame(true);
+  } else {
+    swapTurns()
+    setBoardHoverClass()
+  }
   // Check for Win
   // Check for Draw
   // Switch turns between cross and circle
-  swapTurns()
-  setBoardHoverClass()
+}
+
+function endGame(draw) {
+  if (draw) {
+    winnerMessageTextElement.innerText = "It's a Draw!!"
+  } else {
+    winnerMessageTextElement.innerText = `${circleTurn ? "O" : "X"} is the winner!!`;
+  }
+  winnerMessageElement.classList.add('show');
+}
+
+function isDraw() {
+  return [...cellElements].every(cell => {
+    return cell.classList.contains(CROSS_CLASS) ||
+      cell.classList.contains(CIRCLE_CLASS)
+  })
 }
 
 function placeMark(cell, currentClass) {
@@ -55,5 +84,14 @@ function setBoardHoverClass() {
   } else {
     board.classList.add(CROSS_CLASS);
   }
+}
 
+// Check for Win
+// If the currentClass is in all 3 of each combination then we have a winner
+function checkWin(currentClass) {
+  return WINNING_COMBINATIONS.some(combination => {
+    return combination.every(index => {
+      return cellElements[index].classList.contains(currentClass)
+    })
+  })
 }
