@@ -6,13 +6,15 @@
   --cell-size: 100px;
   --mark-size: calc(var(--cell-size) * .9);
 
-  --plump-purple: #664EAE;
-  --pale-violet: #C4A8FF;
-  --rich-black: #0C0B13;
+  --plump-purple: rgb(102, 78, 174);
+  --russian-violet: rgb(26, 5, 84);
+  --pale-purple: rgba(196, 168, 255, 0.9);
+  --rich-black: rgb(12, 11, 19);
 }
 
 body {
   margin: 0;
+  background-color: var(--rich-black);
 }
 
 .board {
@@ -29,11 +31,12 @@ body {
 .cell {
   width: var(--cell-size);
   height: var(--cell-size);
-  border: 1px solid var(--rich-black);
+  border: 1px solid white;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .cell:first-child,
@@ -56,38 +59,86 @@ body {
   border-bottom: none;
 }
 
-.cell.x-mark::before,
-.cell.x-mark::after {
+
+/*  Cross and Circle Marks */
+
+.cell.cross, .cell.circle {
+  cursor: not-allowed;
+}
+
+.cell.cross::before,
+.cell.cross::after,
+.cell.circle::before {
+  background-color: var(--plump-purple);
+}
+
+.board.cross .cell:not(.cross):not(.circle):hover::before,
+.board.cross .cell:not(.cross):not(.circle):hover::after,
+.board.circle .cell:not(.cross):not(.circle):hover::before {
+  background-color: var(--russian-violet);
+}
+
+.cell.cross::before,
+.cell.cross::after,
+.board.cross .cell:not(.cross):not(.circle):hover::before,
+.board.cross .cell:not(.cross):not(.circle):hover::after{
   content: "";
   position: absolute;
   width: calc(var(--mark-size) * .15);
   height: var(--mark-size);
-  background-color: var(--plump-purple);
 }
 
-.cell.x-mark::before {
+.cell.cross::before,
+.board.cross .cell:not(.cross):not(.circle):hover::before {
   transform: rotate(45deg);
 }
 
-.cell.x-mark::after {
+.cell.cross::after,
+.board.cross .cell:not(.cross):not(.circle):hover::after {
   transform: rotate(-45deg);
 }
 
-.cell.o-mark::before,
-.cell.o-mark::after {
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.cross):not(.circle):hover::before,
+.board.circle .cell:not(.cross):not(.circle):hover::after {
   content: "";
   position: absolute;
   border-radius: 50%;
 }
 
-.cell.o-mark::before {
+.cell.circle::before,
+.board.circle .cell:not(.cross):not(.circle):hover::before {
   width: var(--mark-size);
   height: var(--mark-size);
-  background-color: var(--plump-purple);
 }
 
-.cell.o-mark::after {
+.cell.circle::after,
+.board.circle .cell:not(.cross):not(.circle):hover::after {
   width: calc(var(--mark-size) * .7);
   height: calc(var(--mark-size) * .7);
-  background-color: white;
+  background-color: var(--rich-black);
+}
+
+.winner-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--pale-purple);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--russian-violet);
+  font-size: 32px;
+}
+
+.winner-message button {
+  font-size: 26px;
+  background-color: var(--plump-purple);
+  color: white;
+  border: 1px solid var(--russian-violet);
+  padding: .25em .5em;
+  cursor: pointer;
 }
