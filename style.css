@@ -4,9 +4,9 @@
 
 :root {
   --cell-size: 100px;
-  --mark-size: cal(var(var(--cell-size) * .9))
+  --mark-size: calc(var(--cell-size) * .9);
 
-  --russian-violet: #1A0554;
+  --plump-purple: #664EAE;
   --pale-violet: #C4A8FF;
   --rich-black: #0C0B13;
 }
@@ -16,7 +16,7 @@ body {
 }
 
 .board {
-  width: 100vh;
+  /* width: 100vh; */
   height: 100vh;
   display: grid;
   justify-content: center;
@@ -30,6 +30,10 @@ body {
   width: var(--cell-size);
   height: var(--cell-size);
   border: 1px solid var(--rich-black);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cell:first-child,
@@ -50,4 +54,40 @@ body {
 .cell:nth-child(7),
 .cell:nth-child(8) {
   border-bottom: none;
+}
+
+.cell.x-mark::before,
+.cell.x-mark::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--mark-size) * .15);
+  height: var(--mark-size);
+  background-color: var(--plump-purple);
+}
+
+.cell.x-mark::before {
+  transform: rotate(45deg);
+}
+
+.cell.x-mark::after {
+  transform: rotate(-45deg);
+}
+
+.cell.o-mark::before,
+.cell.o-mark::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.o-mark::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+  background-color: var(--plump-purple);
+}
+
+.cell.o-mark::after {
+  width: calc(var(--mark-size) * .7);
+  height: calc(var(--mark-size) * .7);
+  background-color: white;
 }
