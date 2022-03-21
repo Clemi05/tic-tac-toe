@@ -57,9 +57,7 @@ function checkWin(currentClass) {
 
 ### Continued development
 
-Following this project, I will continue working on small JavaScript projects (calculator or 2048 game) to exercise my self and improve my JavaScript and CSS skills. I am also gone learn more about React.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+Following this project, I will continue working on small JavaScript projects (calculator or 2048 game) to exercise my self and improve my JavaScript and CSS skills. I am also going to learn more about React.
 
 ### Useful resources
 
@@ -73,4 +71,4 @@ Following this project, I will continue working on small JavaScript projects (ca
 ## Author
 
 - Github - [Clemi05](https://github.com/Clemi05)
-- LinkedIn - [Clément Azalbert](https://www.twitter.com/yourusername)
+- LinkedIn - [Clément Azalbert](https://www.linkedin.com/in/clement-azalbert/)
